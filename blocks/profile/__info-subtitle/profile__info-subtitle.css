@@ -1,0 +1,14 @@
+.profile__info-subtitle {
+  margin: 0;
+
+  align-self: center;
+}
+
+@media screen and (max-width: 645px) {
+  .profile__info-subtitle {
+    margin-top: 14px;
+
+    text-align: center;
+  }
+
+}
