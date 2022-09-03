@@ -7,6 +7,10 @@
   margin-bottom: 5px;
   padding: 0;
 
+  transition: .2s;
+
+  cursor: pointer;
+
   background-color: #000;
   background-size: cover;
   border: 0;
@@ -20,4 +24,8 @@
     height: 18px;
   }
 
+}
+
+.profile__info-edit-button:hover {
+  opacity: .6;
 }

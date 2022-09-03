@@ -5,6 +5,10 @@
   margin: auto 0;
   padding: 0;
 
+  transition: .2s;
+
+  cursor: pointer;
+
   background-color: #000;
   border: 2px solid #fff;
   border-radius: 2px;
@@ -20,4 +24,8 @@
     margin: 36px auto 0;
   }
 
+}
+
+.profile__add-button:hover {
+  opacity: .6;
 }
