@@ -2,13 +2,21 @@
   margin: 0;
 
   align-self: center;
+
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 122%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-@media screen and (max-width: 645px) {
+@media screen and (max-width: 699px) {
   .profile__info-subtitle {
     margin-top: 14px;
 
     text-align: center;
+    font-size: .875rem;
   }
 
 }
