@@ -6,5 +6,7 @@
   bottom: 34px;
   right: 30px;
 
+  cursor: pointer;
+
   background-image: url(../../../images/like-inactive.svg);
 }
