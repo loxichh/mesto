@@ -16,3 +16,16 @@
   font-size: 1.125rem;
   line-height: 122%;
 }
+
+.popup__save-button:hover {
+  opacity: .8;
+}
+
+@media screen and (max-width: 545px) {
+  .popup__save-button {
+    padding: 14px 0;
+
+    font-size: .875rem;
+  }
+
+}

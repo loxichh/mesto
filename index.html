@@ -65,12 +65,15 @@
       </section>
 
       <section class="popup popup_opened">
+        <div class="popup__overlay">
           <form class="popup__form">
             <h4 class="popup__heading">Редактировать профиль</h4>
-            <input type="text" name="name" class="popup__field">
-            <input type="text" name="description" class="popup__field">
+            <input type="text" name="name" placeholder="Имя" class="popup__field">
+            <input type="text" name="description" placeholder="Описание" class="popup__field">
             <button class="popup__save-button">Сохранить</button>
           </form>
+          <button class="popup__close-button"></button>
+        </div>
       </section>
     </main>
 
