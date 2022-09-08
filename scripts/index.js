@@ -11,13 +11,14 @@ let popupOverlay = popup.querySelector('.popup__overlay')
 let closeButton = popupOverlay.querySelector('.popup__close-button')
 let popupForm = popupOverlay.querySelector('.popup__form')
 let saveButton = popupForm.querySelector('.popup__save-button')
+let name = popupForm.querySelector('[name="name"]')
+let description = popupForm.querySelector('[name="description"]')
 
 // To open a popup
 function openPopup() {
   popup.classList.add('popup_opened')
 
-  let name = popupForm.querySelector('[name="name"]')
-  let description = popupForm.querySelector('[name="description"]')
+
 
   let data = {
     name: profileName.innerHTML,
@@ -38,19 +39,11 @@ function closePopup() {
 closeButton.addEventListener('click', closePopup)
 
 // To save information
-function save() {
-    popupForm.addEventListener('submit', formSubmit)
-    closePopup()
-}
-
-saveButton.addEventListener('click', save)
+popupForm.addEventListener('submit', formSubmit)
 
 // To submit form
 function formSubmit (evt) {
   evt.preventDefault()
-
-  let name = popupForm.querySelector('[name="name"]')
-  let description = popupForm.querySelector('[name="description"]')
 
   let data = {
     name: name.value,
@@ -59,6 +52,7 @@ function formSubmit (evt) {
 
   profileName.textContent = data['name']
   profileDescription.textContent = data['description']
+  closePopup()
 }
 
 
