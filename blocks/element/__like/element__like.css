@@ -2,6 +2,8 @@
   width: 22px;
   height: 19px;
 
+  padding: 0;
+
   position: absolute;
   bottom: 34px;
   right: 30px;
@@ -9,4 +11,11 @@
   cursor: pointer;
 
   background-image: url(../../../images/like-inactive.svg);
+  background-color: rgba(0, 0, 0, 0); 
+  background-size: cover;
+  border: 0;
+}
+
+.element__like:hover {
+  opacity: 0.5;
 }

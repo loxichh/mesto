@@ -1,5 +1,5 @@
 .element__title {
-  width: 184px;
+  max-width: 184px;
 
   margin: 25px 0 31px 21px;
 
