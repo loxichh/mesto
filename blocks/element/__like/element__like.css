@@ -11,7 +11,7 @@
   cursor: pointer;
 
   background-image: url(../../../images/like-inactive.svg);
-  background-color: rgba(0, 0, 0, 0); 
+  background-color: rgba(0, 0, 0, 0);
   background-size: cover;
   border: 0;
 }
