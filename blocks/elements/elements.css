@@ -5,8 +5,6 @@
   row-gap: 20px;
   justify-content: center;
 
-  padding: 0;
-
   margin-top: 50px;
 }
 
@@ -22,8 +20,6 @@
 @media screen and (max-width: 645px) {
   .elements {
     grid-template-columns: repeat(1, 282px);
-
-
   }
 
 }
