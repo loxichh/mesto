@@ -18,15 +18,8 @@ let description = popupForm.querySelector('[name="description"]')
 function openPopup() {
   popup.classList.add('popup_opened')
 
-
-
-  let data = {
-    name: profileName.innerHTML,
-    description: profileDescription.innerHTML
-  }
-
-  name.value = data['name']
-  description.value = data['description']
+  name.value = profileName.textContent
+  description.value = profileDescription.textContent
 }
 
 editButton.addEventListener('click', openPopup)
@@ -52,6 +45,7 @@ function formSubmit (evt) {
 
   profileName.textContent = data['name']
   profileDescription.textContent = data['description']
+  
   closePopup()
 }
 
