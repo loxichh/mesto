@@ -3,27 +3,26 @@ const profile = document.querySelector('.profile')
 const profileWrapper = document.querySelector('.profile__wrapper')
 const profileInfo = document.querySelector('.profile__info')
 const editButton = document.querySelector('.profile__info-edit-button')
-const addButton = document.querySelector('.profile__add-button')
+const buttonAdd = document.querySelector('.profile__add-button')
 const profileName = document.querySelector('.profile__info-title')
 const profileDescription = document.querySelector('.profile__info-subtitle')
 
-const popup = document.querySelector('.popup')
 const popupEdit = document.querySelector('#edit')
 const popupAdd = document.querySelector('#add')
+const popupFormEdit = document.querySelector('#form-edit')
+const popupFormAdd = document.querySelector('#form-add')
 const popupView = document.querySelector ('#view')
-const editCloseButton = document.querySelector('#edit-close-btn')
-const addCloseButton = document.querySelector('#add-close-btn')
-const viewCloseButton = document.querySelector('#view-close-btn')
-const closeButton = document.querySelector('.popup__close-button')
-const saveButton = document.querySelector('.popup__save-button')
+const buttonCloseEdit = document.querySelector('#edit-close-btn')
+const buttonCloseAdd = document.querySelector('#add-close-btn')
+const buttonCloseView = document.querySelector('#view-close-btn')
 const name = document.querySelector('[name="name"]')
 const description = document.querySelector('[name="description"]')
 const place = document.querySelector('[name="place"]')
 const link = document.querySelector('[name="link"]')
 
-const deleteButton = document.querySelector('.element__trash')
-const cardImage = document.querySelector('.element__image')
 const cardTitle = document.querySelector('.element__title')
+const image = popupView.querySelector('.popup__image')
+const subtitle = popupView.querySelector('.popup__subtitle')
 
 const initialCards = [
   {
@@ -52,27 +51,26 @@ const initialCards = [
   }
 ]; 
 
-let elementTemplate = document.querySelector('#element').content
+const elementTemplate = document.querySelector('#element').content
 const elementsPlace = document.querySelector('.elements')
 
 function newCard(card) {
-  let elementChild = elementTemplate.querySelector('.element').cloneNode(true)
+  const elementChild = elementTemplate.querySelector('.element').cloneNode(true)
+  const imageElement = elementChild.querySelector('.element__image')
   elementChild.querySelector('.element__title').textContent = card.name
-  elementChild.querySelector('.element__image').src = card.link
-  elementChild.querySelector('.element__image').alt = card.name
+  imageElement.src = card.link
+  imageElement.alt = card.name
   assignListeners(elementChild)
   elementsPlace.prepend(elementChild)
 }
 
-
-
 // To open a popup
-function selectedPopup(popup) {
+function selectAPopup(popup) {
   popup.classList.toggle('popup_opened')
 }
 
 function openAPopupEdit() {
-  selectedPopup(popupEdit)
+  selectAPopup(popupEdit)
   name.value = profileName.textContent
   description.value = profileDescription.textContent
 }
@@ -84,19 +82,18 @@ function redactProfile(evt) {
   profileDescription.textContent = description.value
   closeAPopupEdit()
 }
-popupEdit.addEventListener('submit', redactProfile)
-
+popupFormEdit.addEventListener('submit', redactProfile)
 
 function openAPopupAdd() {
-  selectedPopup(popupAdd)
+  selectAPopup(popupAdd)
+  place.value = ''
+  link.value = ''
 }
-addButton.addEventListener('click', openAPopupAdd)
+buttonAdd.addEventListener('click', openAPopupAdd)
 
 function openAPopupView(evt) {
-  selectedPopup(popupView)
-  let image = popupView.querySelector('.popup__image')
-  let subtitle = popupView.querySelector('.popup__subtitle')
-  let popupImage = evt.target
+  selectAPopup(popupView)
+  const popupImage = evt.target
   image.src = popupImage.src
   image.alt = popupImage.alt
   subtitle.textContent = image.alt
@@ -104,19 +101,19 @@ function openAPopupView(evt) {
 
 // To close a popup
 function closeAPopupEdit() {
-  selectedPopup(popupEdit)
+  selectAPopup(popupEdit)
 }
-editCloseButton.addEventListener('click', closeAPopupEdit)
+buttonCloseEdit.addEventListener('click', closeAPopupEdit)
 
 function closeAPopupAdd() {
-  selectedPopup(popupAdd)
+  selectAPopup(popupAdd)
 }
-addCloseButton.addEventListener('click', closeAPopupAdd)
+buttonCloseAdd.addEventListener('click', closeAPopupAdd)
 
 function closeAPopupView() {
-  selectedPopup(popupView)
+  selectAPopup(popupView)
 }
-viewCloseButton.addEventListener('click', closeAPopupView)
+buttonCloseView.addEventListener('click', closeAPopupView)
 
 //To create a card
 function startImages() {
@@ -133,7 +130,7 @@ function addCard(evt) {
   
   closeAPopupAdd()
 }
-popupAdd.addEventListener('submit', addCard)
+popupFormAdd.addEventListener('submit', addCard)
 
 // To delete a card
 function deleteACard(evt) {
