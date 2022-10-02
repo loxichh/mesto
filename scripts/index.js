@@ -54,14 +54,14 @@ const initialCards = [
 const elementTemplate = document.querySelector('#element').content
 const elementsPlace = document.querySelector('.elements')
 
-function newCard(card) {
+function createACard(card) {
   const elementChild = elementTemplate.querySelector('.element').cloneNode(true)
   const imageElement = elementChild.querySelector('.element__image')
   elementChild.querySelector('.element__title').textContent = card.name
   imageElement.src = card.link
   imageElement.alt = card.name
   assignListeners(elementChild)
-  elementsPlace.prepend(elementChild)
+  return elementChild
 }
 
 // To open a popup
@@ -74,6 +74,7 @@ function openAPopupEdit() {
   name.value = profileName.textContent
   description.value = profileDescription.textContent
 }
+
 editButton.addEventListener('click', openAPopupEdit)
 
 function redactProfile(evt) {
@@ -82,13 +83,13 @@ function redactProfile(evt) {
   profileDescription.textContent = description.value
   closeAPopupEdit()
 }
+
 popupFormEdit.addEventListener('submit', redactProfile)
 
 function openAPopupAdd() {
   selectAPopup(popupAdd)
-  place.value = ''
-  link.value = ''
 }
+
 buttonAdd.addEventListener('click', openAPopupAdd)
 
 function openAPopupView(evt) {
@@ -103,33 +104,46 @@ function openAPopupView(evt) {
 function closeAPopupEdit() {
   selectAPopup(popupEdit)
 }
+
 buttonCloseEdit.addEventListener('click', closeAPopupEdit)
 
 function closeAPopupAdd() {
   selectAPopup(popupAdd)
 }
+
 buttonCloseAdd.addEventListener('click', closeAPopupAdd)
 
 function closeAPopupView() {
   selectAPopup(popupView)
 }
+
 buttonCloseView.addEventListener('click', closeAPopupView)
 
 //To create a card
-function startImages() {
-  initialCards.reverse().forEach(newCard)
+function addCardToContainer(place, card) {
+  place.prepend(card);
 }
+
+function startImages() {
+  initialCards.forEach((card) =>{
+    const startACard = createACard(card)
+    addCardToContainer(elementsPlace, startACard)
+  }
+)}
 
 startImages()
 
 function addCard(evt) {
   evt.preventDefault()
-  newCard({
+  const newCard = createACard({
     name: place.value,
     link: link.value})
-  
+  addCardToContainer(elementsPlace, newCard)
   closeAPopupAdd()
+  place.value = ''
+  link.value = ''
 }
+
 popupFormAdd.addEventListener('submit', addCard)
 
 // To delete a card
