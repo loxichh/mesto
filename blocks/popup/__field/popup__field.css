@@ -3,7 +3,6 @@
   min-width: 238px;
   min-height: 27px;
 
-  margin: 0 auto 30px;
   padding: 0;
 
   border: 0;
@@ -15,13 +14,3 @@
   font-size: .875rem;
 }
 
-.popup__field:last-of-type {
-  margin: 0 auto 48px;
-}
-
-@media screen and (max-width: 402px) {
-  .popup__field:last-of-type {
-    margin: 0 auto 45px;
-  }
-
-}

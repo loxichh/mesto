@@ -2,10 +2,9 @@
   min-width: 430px;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
 
   background-color: #fff;
-  background-size: cover;
   border-radius: 10px;
 }
 
