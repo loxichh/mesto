@@ -67,6 +67,7 @@ function createACard(card) {
 // To open a popup
 function selectAPopup(popup) {
   popup.classList.toggle('popup_opened')
+  document.addEventListener('keydown', closeAPopupESC);
 }
 
 function openAPopupEdit() {
@@ -101,6 +102,18 @@ function openAPopupView(evt) {
 }
 
 // To close a popup
+function closeAPopup (popup) {
+  popup.classList.remove('popup_opened'); 
+  document.removeEventListener('keydown', closeAPopupESC)
+}
+
+function closeAPopupESC (evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened')
+    closeAPopup(openedPopup)
+  }
+}
+
 function closeAPopupEdit() {
   selectAPopup(popupEdit)
 }
