@@ -7,6 +7,7 @@ const buttonAdd = document.querySelector('.profile__add-button')
 const profileName = document.querySelector('.profile__info-title')
 const profileDescription = document.querySelector('.profile__info-subtitle')
 
+const popupList = document.querySelectorAll('.popup')
 const popupEdit = document.querySelector('#edit')
 const popupAdd = document.querySelector('#add')
 const popupFormEdit = document.querySelector('#form-edit')
@@ -132,6 +133,14 @@ function closeAPopupView() {
 
 buttonCloseView.addEventListener('click', closeAPopupView)
 
+popupList.forEach(function (popup) {
+  popup.addEventListener('click', function (evt) {
+    if (evt.target.classList.contains('popup_opened')) {
+      closeAPopup(popup)
+    }
+  })
+})
+
 //To create a card
 function addCardToContainer(place, card) {
   place.prepend(card);
@@ -175,20 +184,3 @@ function assignListeners(item) {
   item.querySelector('.element__trash').addEventListener('click', deleteACard)
   item.querySelector('.element__image').addEventListener('click', openAPopupView)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
