@@ -66,13 +66,13 @@ function createACard(card) {
 }
 
 // To open a popup
-function selectAPopup(popup) {
-  popup.classList.toggle('popup_opened')
+function openAPopup(popup) {
+  popup.classList.add('popup_opened')
   document.addEventListener('keydown', closeAPopupESC);
 }
 
 function openAPopupEdit() {
-  selectAPopup(popupEdit)
+  openAPopup(popupEdit)
   name.value = profileName.textContent
   description.value = profileDescription.textContent
 }
@@ -89,13 +89,13 @@ function redactProfile(evt) {
 popupFormEdit.addEventListener('submit', redactProfile)
 
 function openAPopupAdd() {
-  selectAPopup(popupAdd)
+  openAPopup(popupAdd)
 }
 
 buttonAdd.addEventListener('click', openAPopupAdd)
 
 function openAPopupView(evt) {
-  selectAPopup(popupView)
+  openAPopup(popupView)
   const popupImage = evt.target
   image.src = popupImage.src
   image.alt = popupImage.alt
@@ -103,8 +103,8 @@ function openAPopupView(evt) {
 }
 
 // To close a popup
-function closeAPopup (popup) {
-  popup.classList.remove('popup_opened'); 
+function closeAPopup(popup) {
+  popup.classList.remove('popup_opened')
   document.removeEventListener('keydown', closeAPopupESC)
 }
 
@@ -116,19 +116,19 @@ function closeAPopupESC (evt) {
 }
 
 function closeAPopupEdit() {
-  selectAPopup(popupEdit)
+  closeAPopup(popupEdit)
 }
 
 buttonCloseEdit.addEventListener('click', closeAPopupEdit)
 
 function closeAPopupAdd() {
-  selectAPopup(popupAdd)
+  closeAPopup(popupAdd)
 }
 
 buttonCloseAdd.addEventListener('click', closeAPopupAdd)
 
 function closeAPopupView() {
-  selectAPopup(popupView)
+  closeAPopup(popupView)
 }
 
 buttonCloseView.addEventListener('click', closeAPopupView)
@@ -138,6 +138,9 @@ popupList.forEach(function (popup) {
     if (evt.target.classList.contains('popup_opened')) {
       closeAPopup(popup)
     }
+    if (evt.target.classList.contains('popup__close-button')) {
+      closeAPopup(popup)
+    } 
   })
 })
 
