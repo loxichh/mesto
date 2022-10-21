@@ -167,6 +167,11 @@ function addCard(evt) {
   closeAPopupAdd()
   place.value = ''
   link.value = ''
+  const buttonSubmit = evt.target.querySelector('.popup__save-button')
+  if (buttonSubmit) {
+    buttonSubmit.classList.add('popup__save-button_disabled')
+    buttonSubmit.setAttribute('disabled', true)
+  } 
 }
 
 popupFormAdd.addEventListener('submit', addCard)

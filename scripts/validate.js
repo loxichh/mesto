@@ -49,15 +49,15 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 }
 
-const enableValidation = () => {
+const enableValidation = (validationObj) => {
   const formList = Array.from(document.querySelectorAll(validationObj.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
     });
-    
-    const fieldsetList = Array.from(formElement.querySelectorAll('.popup__form-set'));
+      setEventListeners(formElement, validationObj)
 
+    const fieldsetList = Array.from(formElement.querySelectorAll(validationObj.FormSetSelector));
     fieldsetList.forEach((fieldSet) => {
       setEventListeners(fieldSet);
     }); 
@@ -68,6 +68,7 @@ const validationObj = {
   formSelector: '.popup__form',
   inputSelector: '.popup__field',
   submitButtonSelector: '.popup__save-button',
+  FormSetSelector: '.popup__form-set',
   inactiveButtonClass: 'popup__save-button_disabled',
   inputErrorClass: 'popup__field_type_error',
   errorClass: 'popup__field-error_active'
