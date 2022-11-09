@@ -1,7 +1,7 @@
 // Variables
-const profile = document.querySelector('.profile')
-const profileWrapper = document.querySelector('.profile__wrapper')
-const profileInfo = document.querySelector('.profile__info')
+import Card from "./Card.js"
+import FormValidator from "./FormValidator.js"
+
 const editButton = document.querySelector('.profile__info-edit-button')
 const buttonAdd = document.querySelector('.profile__add-button')
 const profileName = document.querySelector('.profile__info-title')
@@ -21,9 +21,10 @@ const description = document.querySelector('[name="description"]')
 const place = document.querySelector('[name="place"]')
 const link = document.querySelector('[name="link"]')
 
-const cardTitle = document.querySelector('.element__title')
 const image = popupView.querySelector('.popup__image')
 const subtitle = popupView.querySelector('.popup__subtitle')
+
+const elementsPlace = document.querySelector('.elements')
 
 const initialCards = [
   {
@@ -52,18 +53,56 @@ const initialCards = [
   }
 ]; 
 
-const elementTemplate = document.querySelector('#element').content
-const elementsPlace = document.querySelector('.elements')
-
-function createACard(card) {
-  const elementChild = elementTemplate.querySelector('.element').cloneNode(true)
-  const imageElement = elementChild.querySelector('.element__image')
-  elementChild.querySelector('.element__title').textContent = card.name
-  imageElement.src = card.link
-  imageElement.alt = card.name
-  assignListeners(elementChild)
-  return elementChild
+const validationObj = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__field_type_error',
+  errorClass: 'popup__field-error_active'
 }
+
+//To create a card
+
+const profileVolidation = new FormValidator(validationObj, popupEdit)
+profileVolidation.enableValidation()
+
+const addCardVolidation = new FormValidator(validationObj, popupAdd)
+addCardVolidation.enableValidation()
+
+function createACard(data) {
+    const element = new Card(data, '#element', openAPopupView)
+    const elementChild = element.generateACard()
+    return elementChild
+  }
+
+function addCard(evt) {
+  evt.preventDefault()
+  const newCard = createACard({
+    name: place.value,
+    link: link.value})
+  addCardToContainer(elementsPlace, newCard)
+  closeAPopupAdd()
+  place.value = ''
+  link.value = ''
+  const buttonSubmit = evt.target.querySelector('.popup__save-button')
+  if (buttonSubmit) {
+    buttonSubmit.classList.add('popup__save-button_disabled')
+    buttonSubmit.setAttribute('disabled', true)
+  } 
+  addCardVolidation.toggleButtonState();
+}
+
+function addCardToContainer(place, card) {
+  place.prepend(card);
+}
+
+initialCards.forEach((card) =>{
+  const startACard = createACard(card)
+  addCardToContainer(elementsPlace, startACard)
+})
+
+popupFormAdd.addEventListener('submit', addCard)
 
 // To open a popup
 function openAPopup(popup) {
@@ -143,52 +182,3 @@ popupList.forEach(function (popup) {
     } 
   })
 })
-
-//To create a card
-function addCardToContainer(place, card) {
-  place.prepend(card);
-}
-
-function startImages() {
-  initialCards.forEach((card) =>{
-    const startACard = createACard(card)
-    addCardToContainer(elementsPlace, startACard)
-  }
-)}
-
-startImages()
-
-function addCard(evt) {
-  evt.preventDefault()
-  const newCard = createACard({
-    name: place.value,
-    link: link.value})
-  addCardToContainer(elementsPlace, newCard)
-  closeAPopupAdd()
-  place.value = ''
-  link.value = ''
-  const buttonSubmit = evt.target.querySelector('.popup__save-button')
-  if (buttonSubmit) {
-    buttonSubmit.classList.add('popup__save-button_disabled')
-    buttonSubmit.setAttribute('disabled', true)
-  } 
-}
-
-popupFormAdd.addEventListener('submit', addCard)
-
-// To delete a card
-function deleteACard(evt) {
-  evt.target.closest('.element').remove()
-}
-
-// To estimate a card
-function estimateACard(evt) {
-  evt.target.classList.toggle('element__like_active') 
-}
-
-//Assign listeners to new cards
-function assignListeners(item) {
-  item.querySelector('.element__like').addEventListener('click', estimateACard)
-  item.querySelector('.element__trash').addEventListener('click', deleteACard)
-  item.querySelector('.element__image').addEventListener('click', openAPopupView)
-}
