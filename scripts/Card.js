@@ -32,7 +32,7 @@ export default class Card {
   _assignListeners() {
     this._likeButton.addEventListener('click', () => this._estimateACard())
     this._trashButton.addEventListener('click', () => this._deleteACard())
-    this._image.addEventListener('click', () => this._openAPopupView())
+    this._image.addEventListener('click', () => this._openAPopupView(this._name, this._link))
   }
   
   generateACard() {

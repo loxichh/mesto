@@ -1,4 +1,6 @@
 .element {
+  min-height: 370.94px;
+
   position: relative;
   
   overflow: hidden;

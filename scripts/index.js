@@ -85,11 +85,7 @@ function addCard(evt) {
   closeAPopupAdd()
   place.value = ''
   link.value = ''
-  const buttonSubmit = evt.target.querySelector('.popup__save-button')
-  if (buttonSubmit) {
-    buttonSubmit.classList.add('popup__save-button_disabled')
-    buttonSubmit.setAttribute('disabled', true)
-  } 
+  addCardVolidation.blockSubmitButton()
   addCardVolidation.toggleButtonState();
 }
 
@@ -133,12 +129,11 @@ function openAPopupAdd() {
 
 buttonAdd.addEventListener('click', openAPopupAdd)
 
-function openAPopupView(evt) {
-  openAPopup(popupView)
-  const popupImage = evt.target
-  image.src = popupImage.src
-  image.alt = popupImage.alt
+function openAPopupView(name, link) {
+  image.src = link
+  image.alt = name
   subtitle.textContent = image.alt
+  openAPopup(popupView)
 }
 
 // To close a popup
